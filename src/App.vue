@@ -1,29 +1,34 @@
 <template>
   <div id="app">
-    <p>random user api Loaded: {{userLoaded}}</p>
+    <p>random user api Loaded: {{Loaded}}</p>
     <button @click="Reload">Reload</button>
+    <p>Button Clicked Times: {{clickedTimes}}</p>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "app",
   data() {
     return {};
   },
+  created() {
+    console.clear();
+  },
   mounted() {
-    this.$store.dispatch("GetUser");
+    this.GetUser();
   },
   computed: {
-    userLoaded() {
-      return this.$store.state.Loaded;
-    }
+    ...mapState(["Loaded", "clickedTimes"])
   },
   methods: {
     Reload() {
       this.$store.commit("SetFalse");
-      this.$store.dispatch("GetUser");
-    }
+      this.GetUser();
+      this.ClickedActions({ count: 2 });
+    },
+    ...mapActions(["GetUser", "ClickedActions"])
   }
 };
 </script>
