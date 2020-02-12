@@ -3,11 +3,20 @@
     <p>random user api Loaded: {{Loaded}}</p>
     <button @click="Reload">Reload</button>
     <p>Button Clicked Times: {{clickedTimes}}</p>
+    <p>Female number: {{FemaleNum}}</p>
+    <p>Male numner: {{MaleNum}}</p>
+    <ul>
+      <li :key="idx" v-for="(el,idx) in users">
+        <p>Name: {{el.name.title}}. {{el.name.first}}</p>
+        <p>Gender: {{el.gender}}</p>
+        <p>Email: {{el.email}}</p>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   name: "app",
   data() {
@@ -20,7 +29,8 @@ export default {
     this.GetUser();
   },
   computed: {
-    ...mapState(["Loaded", "clickedTimes"])
+    ...mapState(["Loaded", "clickedTimes", "users"]),
+    ...mapGetters(["FemaleNum", "MaleNum"])
   },
   methods: {
     Reload() {
@@ -32,14 +42,3 @@ export default {
   }
 };
 </script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

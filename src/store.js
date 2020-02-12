@@ -7,32 +7,33 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         Loaded: false,
-        clickedTimes: 0
+        clickedTimes: 0,
+        users: {}
+    },
+    getters:
+    {
+        FemaleNum(state) {
+            return state.users.filter(item => item.gender == 'female').length;
+        },
+        MaleNum(state, getters) {
+            return state.users.length - getters.FemaleNum
+        }
     },
     actions: {
         GetUser({ commit, dispatch }) {
-            axios.get('https://randomuser.me/api/')
+            axios.get('https://randomuser.me/api/?results=5')
                 .then(function (res) {
-                    // handle success
-                    console.log(res.data.results[0]);
-                    commit('MyMutations')
-                    // dispatch('AnotherActions')
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
+                    var data = res.data.results
+                    commit('dataLoaded')
+                    commit('setUserInfo', data)
                 })
         },
-        // AnotherActions() {
-        //     console.log('Another Actions run!');
-        // },
         ClickedActions({ commit }, payload) {
             commit('addTimes', payload)
         }
     },
     mutations: {
-        MyMutations(state) {
-            console.log('MyMutations run!');
+        dataLoaded(state) {
             state.Loaded = true;
         },
         SetFalse(state) {
@@ -40,9 +41,10 @@ const store = new Vuex.Store({
         },
         addTimes(state, payload) {
             state.clickedTimes = state.clickedTimes + payload.count;
+        },
+        setUserInfo(state, payload) {
+            state.users = payload
         }
-
     }
 })
-
 export default store;
