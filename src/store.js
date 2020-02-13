@@ -17,13 +17,21 @@ const store = new Vuex.Store({
         },
         MaleNum(state, getters) {
             return state.users.length - getters.FemaleNum
+        },
+        returnFn: state => gd => {
+            if (state.users.filter(item => item.gender == gd).length > 2)
+                console.log('There are over 2 ' + gd + ' in data')
+            else
+                console.log('No over 2 ' + gd + ' in data');
         }
+
     },
     actions: {
         GetUser({ commit, dispatch }) {
             axios.get('https://randomuser.me/api/?results=5')
                 .then(function (res) {
                     var data = res.data.results
+                    // console.log(data);
                     commit('dataLoaded')
                     commit('setUserInfo', data)
                 })
