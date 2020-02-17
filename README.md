@@ -1,4 +1,7 @@
-# vuex_demo2
+# Vuex - Actions、Getters Demo
+
+[Mdeium notes: ]()
+
 
 ## Project setup
 ```
