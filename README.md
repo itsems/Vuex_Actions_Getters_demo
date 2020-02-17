@@ -1,6 +1,6 @@
 # Vuex - Actions、Getters Demo
 
-[Mdeium notes: ]()
+[Mdeium notes]()
 
 
 ## Project setup
