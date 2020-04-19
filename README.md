@@ -1,7 +1,8 @@
 # Vuex - Actions、Getters Demo
 
-[Mdeium notes]()
+## Medium Doc
 
+[[Vue]  Vuex 是什麼? 怎麼用? - Actions (2/5)](https://medium.com/itsems-frontend/vue-vuex2-actions-7764ebed3962)
 
 ## Project setup
 ```
@@ -17,11 +18,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
